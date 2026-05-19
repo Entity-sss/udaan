@@ -1,8 +1,9 @@
 [build]
-  command = "cd artifacts/udaan-ai && pnpm install && pnpm run build"
+  command = "pnpm run build"
   publish = "artifacts/udaan-ai/dist"
+  base = "."
 
 [build.environment]
   NODE_VERSION = "20"
   PNPM_VERSION = "9"
-  
+  NPM_FLAGS = "--legacy-peer-deps"
