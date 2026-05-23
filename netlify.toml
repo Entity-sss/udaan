@@ -1,8 +1,8 @@
 [build]
-  base = "Udaan-Growth-System"
-  command = "pnpm install --no-frozen-lockfile && pnpm run build"
-  publish = "dist"
+  base = ""
+  command = "cd artifacts/udaan-ai && pnpm install --no-frozen-lockfile && pnpm run build"
+  publish = "artifacts/udaan-ai/dist"
 
 [build.environment]
   NODE_VERSION = "20"
-  PNPM_VERSION = "10.30.3"
+  PNPM_FLAGS = "--no-frozen-lockfile"
