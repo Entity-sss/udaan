@@ -5,6 +5,7 @@ import {
 import { getStoredStudent } from "@/lib/auth";
 import { useLocation } from "wouter";
 import { getConfirmedRoadmapProfile } from "@/lib/assessment-draft";
+import { getSkillsFromRoadmap } from "@/lib/skills-progress";
 import { Storage } from "@/lib/storage";
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -495,7 +496,16 @@ function LearningRoadmapSteps({ skills, skillIconMap, setLocation }: { skills: s
                   ⏱️ Estimated: {index === 0 ? "2-3 weeks" : index === skills.length - 1 ? "4-6 weeks" : "3-4 weeks"}
                 </span>
                 <button
-                  onClick={() => setLocation(`/skill/${skill.toLowerCase().replace(/\s+/g, '-')}/beginner/1`)}
+                  onClick={() => {
+                    const roadmapSkills = getSkillsFromRoadmap();
+                    const match = roadmapSkills.find(
+                      s => s.name.toLowerCase() === skill.toLowerCase(),
+                    );
+                    const skillId =
+                      match?.id ??
+                      skill.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+                    setLocation(`/skills/${skillId}`);
+                  }}
                   style={{
                     padding: "0.5rem 1.25rem",
                     background: "linear-gradient(135deg, #7c3aed, #9333ea)",

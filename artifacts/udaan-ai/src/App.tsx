@@ -8,6 +8,24 @@ import Signup from "@/pages/Signup";
 import Assessment from "@/pages/Assessment";
 import AssessmentConfirm from "@/pages/AssessmentConfirm";
 import AppLayout from "@/pages/AppLayout";
+import Dashboard from "@/pages/Dashboard";
+import Roadmap from "@/pages/Roadmap";
+import Courses from "@/pages/Courses";
+import CourseDetail from "@/pages/CourseDetail";
+import Progress from "@/pages/Progress";
+import Certificates from "@/pages/Certificates";
+import Library from "@/pages/Library";
+import MockTest from "@/pages/MockTest";
+import MockInterview from "@/pages/MockInterview";
+import ResumeBuilder from "@/pages/ResumeBuilder";
+import Skills from "@/pages/Skills";
+import SkillLevels from "@/pages/SkillLevels";
+import SkillPhases from "@/pages/SkillPhases";
+import PhaseContent from "@/pages/PhaseContent";
+import PhaseQuizPage from "@/pages/PhaseQuizPage";
+import LevelQuizPage from "@/pages/LevelQuizPage";
+import FinalSkillQuizPage from "@/pages/FinalSkillQuizPage";
+import SkillProject from "@/pages/SkillProject";
 import { getStoredStudent } from "@/lib/auth";
 
 const queryClient = new QueryClient({
@@ -25,116 +43,129 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+function AuthLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <AuthGuard>
+      <AppLayout>{children}</AppLayout>
+    </AuthGuard>
+  );
+}
+
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Landing} />
       <Route path="/signup" component={Signup} />
-      <Route path="/assessment">
-        <AuthGuard>
-          <Assessment />
-        </AuthGuard>
-      </Route>
+
       <Route path="/assessment/confirm">
         <AuthGuard>
           <AssessmentConfirm />
         </AuthGuard>
       </Route>
-      <Route path="/dashboard">
+      <Route path="/assessment">
         <AuthGuard>
-          <AppLayout />
+          <Assessment />
         </AuthGuard>
       </Route>
-      <Route path="/roadmap">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
-      </Route>
-      <Route path="/courses/:courseId">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
-      </Route>
+
       <Route path="/skills/:skillId/skill-final">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <FinalSkillQuizPage />
+        </AuthLayout>
       </Route>
       <Route path="/skills/:skillId/project">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <SkillProject />
+        </AuthLayout>
       </Route>
       <Route path="/skills/:skillId/:levelId/level-test">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <LevelQuizPage />
+        </AuthLayout>
       </Route>
       <Route path="/skills/:skillId/:levelId/:phaseId/test">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <PhaseQuizPage />
+        </AuthLayout>
       </Route>
       <Route path="/skills/:skillId/:levelId/:phaseId">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <PhaseContent />
+        </AuthLayout>
       </Route>
       <Route path="/skills/:skillId/:levelId">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <SkillPhases />
+        </AuthLayout>
       </Route>
       <Route path="/skills/:skillId">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <SkillLevels />
+        </AuthLayout>
       </Route>
       <Route path="/skills">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <Skills />
+        </AuthLayout>
+      </Route>
+
+      <Route path="/courses/:courseId">
+        <AuthLayout>
+          <CourseDetail />
+        </AuthLayout>
       </Route>
       <Route path="/courses">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <Courses />
+        </AuthLayout>
+      </Route>
+
+      <Route path="/dashboard">
+        <AuthLayout>
+          <Dashboard />
+        </AuthLayout>
+      </Route>
+      <Route path="/roadmap">
+        <AuthLayout>
+          <Roadmap />
+        </AuthLayout>
       </Route>
       <Route path="/progress">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <Progress />
+        </AuthLayout>
       </Route>
       <Route path="/certificates">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <Certificates />
+        </AuthLayout>
       </Route>
       <Route path="/library">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <Library />
+        </AuthLayout>
       </Route>
       <Route path="/mock-test">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <MockTest />
+        </AuthLayout>
       </Route>
       <Route path="/mock-interview">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
-      </Route>
-      <Route path="/resume">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <MockInterview />
+        </AuthLayout>
       </Route>
       <Route path="/resume-builder">
-        <AuthGuard>
-          <AppLayout />
-        </AuthGuard>
+        <AuthLayout>
+          <ResumeBuilder />
+        </AuthLayout>
       </Route>
+      <Route path="/resume">
+        <AuthLayout>
+          <ResumeBuilder />
+        </AuthLayout>
+      </Route>
+
       <Route component={NotFound} />
     </Switch>
   );

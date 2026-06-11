@@ -1,28 +1,9 @@
-import { useState } from "react";
-import { Switch, Route } from "wouter";
+import { useState, type ReactNode } from "react";
 import { Sidebar } from "@/components/Sidebar";
 import { ChatBot } from "@/components/ChatBot";
 import { StarField } from "@/components/StarField";
-import Dashboard from "./Dashboard";
-import Roadmap from "./Roadmap";
-import Courses from "./Courses";
-import CourseDetail from "./CourseDetail";
-import Progress from "./Progress";
-import Certificates from "./Certificates";
-import Library from "./Library";
-import MockTest from "./MockTest";
-import MockInterview from "./MockInterview";
-import ResumeBuilder from "./ResumeBuilder";
-import Skills from "./Skills";
-import SkillLevels from "./SkillLevels";
-import SkillPhases from "./SkillPhases";
-import PhaseContent from "./PhaseContent";
-import PhaseQuizPage from "./PhaseQuizPage";
-import LevelQuizPage from "./LevelQuizPage";
-import FinalSkillQuizPage from "./FinalSkillQuizPage";
-import SkillProject from "./SkillProject";
 
-export default function AppLayout() {
+export default function AppLayout({ children }: { children: ReactNode }) {
   const [chatOpen, setChatOpen] = useState(false);
 
   return (
@@ -47,27 +28,7 @@ export default function AppLayout() {
             maxHeight: "100vh",
           }}
         >
-          <Switch>
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/roadmap" component={Roadmap} />
-            <Route path="/courses/:courseId" component={CourseDetail} />
-            <Route path="/courses" component={Courses} />
-            <Route path="/progress" component={Progress} />
-            <Route path="/certificates" component={Certificates} />
-            <Route path="/library" component={Library} />
-            <Route path="/mock-test" component={MockTest} />
-            <Route path="/mock-interview" component={MockInterview} />
-            <Route path="/resume" component={ResumeBuilder} />
-            <Route path="/resume-builder" component={ResumeBuilder} />
-            <Route path="/skills/:skillId/skill-final" component={FinalSkillQuizPage} />
-            <Route path="/skills/:skillId/project" component={SkillProject} />
-            <Route path="/skills/:skillId/:levelId/level-test" component={LevelQuizPage} />
-            <Route path="/skills/:skillId/:levelId/:phaseId/test" component={PhaseQuizPage} />
-            <Route path="/skills/:skillId/:levelId/:phaseId" component={PhaseContent} />
-            <Route path="/skills/:skillId/:levelId" component={SkillPhases} />
-            <Route path="/skills/:skillId" component={SkillLevels} />
-            <Route path="/skills" component={Skills} />
-          </Switch>
+          {children}
         </main>
       </div>
 
